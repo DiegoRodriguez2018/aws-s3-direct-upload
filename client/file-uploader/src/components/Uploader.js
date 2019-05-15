@@ -14,17 +14,19 @@ export default class Uploader extends Component {
 
   uploadFile = e => {
     e.preventDefault();
-    console.log('uploading');
+    console.log('Uploading....');
     const { file } = this.state;
+
+    const contentType = file.type; // eg. image/jpeg or image/svg+xml
 
     const generatePutUrl = 'http://localhost:3500/generate-put-url';
     const options = {
       params: {
         Key: file.name,
-        ContentType: 'image/jpeg'
+        ContentType: contentType
       },
-      header:{
-        ContentType: 'image/jpeg'
+      headers: {
+        'Content-Type': contentType
       }
     };
 
@@ -33,7 +35,7 @@ export default class Uploader extends Component {
         data: { putURL }
       } = res;
 
-      console.log({putURL, file, options});
+      console.log({ putURL, file, options });
 
       axios
         .put(putURL, file, options)
@@ -45,12 +47,12 @@ export default class Uploader extends Component {
           console.log('err', err);
         });
     });
-
   };
 
   render() {
     return (
       <React.Fragment>
+        <h1>Upload an image to AWS S3 bucket</h1>
         <input
           id='upload-image'
           type='file'

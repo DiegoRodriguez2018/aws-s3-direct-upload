@@ -38,7 +38,7 @@ async function generateGetUrl(Key) {
   });
 }
 
-// PUT URL Generator, note ContentType default is image/jpeg
+// PUT URL Generator
 async function generatePutUrl(Key, ContentType) {
   return new Promise((resolve, reject) => {
     // Note Bucket is retrieved from the env variable above.
