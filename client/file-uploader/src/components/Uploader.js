@@ -14,31 +14,29 @@ export default class Uploader extends Component {
 
   uploadFile = e => {
     e.preventDefault();
-    const url = 'http://localhost:3500/file-upload';
+    console.log('uploading');
+    const { file } = this.state;
 
-    const file = this.file;
-    const fileName = file.name;
-
-    const config = {
+    const generatePutUrl = 'http://localhost:3500/generate-put-url';
+    const options = {
       params: {
-        Key: fileName,
+        Key: file.name,
+        ContentType: 'image/jpeg'
+      },
+      header:{
         ContentType: 'image/jpeg'
       }
     };
 
-    axios.get(url, config).then(res => {
+    axios.get(generatePutUrl, options).then(res => {
       const {
-        data: { putUrl }
+        data: { putURL }
       } = res;
-      const s3PutUrl = putUrl;
-      const options = {
-        headers: {
-          'Content-Type': 'image/jpeg'
-        }
-      };
+
+      console.log({putURL, file, options});
 
       axios
-        .put(s3PutUrl, file, options)
+        .put(putURL, file, options)
         .then(res => {
           console.log('Success');
           console.log('res', ': ', res);
@@ -47,6 +45,7 @@ export default class Uploader extends Component {
           console.log('err', err);
         });
     });
+
   };
 
   render() {

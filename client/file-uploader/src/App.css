@@ -23,6 +23,26 @@
   color: #61dafb;
 }
 
+
+.preview-container{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
+.preview{ 
+  margin-top: 1rem;
+  border: 1px grey solid;
+  border-radius: 2%;
+  width: 70vh;
+  height: 70vh;
+}
+
+#show-picture{
+  min-width: 100%;
+  max-width: 100%;
+  max-height: 100%;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
