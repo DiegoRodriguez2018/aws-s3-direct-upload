@@ -5,14 +5,14 @@ const AWS = require('aws-sdk'); // Requiring AWS SDK.
 AWS.config = new AWS.Config({
   accessKeyId: process.env.S3_KEY, // stored in the .env file
   secretAccessKey: process.env.S3_SECRET, // stored in the .env file
-  region: 'us-east-1' // This refers to your bucket configuration.
+  region: process.env.BUCKET_REGION // This refers to your bucket configuration.
 });
 
 // Creating a S3 instance
 const s3 = new AWS.S3();
 
 // Retrieving the bucket name from env variable
-const Bucket = process.env.BUCKET;
+const Bucket = process.env.BUCKET_NAME;
 
 // In order to create pre-signed GET adn PUT URLs we use the AWS SDK s3.getSignedUrl method.
 // getSignedUrl(operation, params, callback) ⇒ String
@@ -38,8 +38,8 @@ async function generateGetUrl(Key) {
   });
 }
 
-// PUT URL Generator
-async function generatePutUrl(Key, ContentType) {
+// PUT URL Generator, note ContentType default is image/jpeg
+async function generatePutUrl(Key, ContentType = 'image/jpeg') {
   return new Promise((resolve, reject) => {
     // Note Bucket is retrieved from the env variable above.
     const params = { Bucket, Key, ContentType };

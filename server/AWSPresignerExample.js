@@ -6,8 +6,7 @@ async function initialize(){
   console.log('getUrl',': ', getUrl);
 
   Key =  'file-to-upload.jpeg';
-  const ContentType = 'image/jpeg';
-  const putUrl = await generatePutUrl(Key, ContentType);
+  const putUrl = await generatePutUrl(Key);
   console.log('putUrl',': ', putUrl);
 }
 
