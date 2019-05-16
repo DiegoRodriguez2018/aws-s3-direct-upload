@@ -19,8 +19,8 @@ app.get('/generate-get-url', (req, res) => {
   // Key refers to the remote name of the file.
   const { Key } = req.query;
   generateGetUrl(Key)
-    .then(getURL => {
-      res.send({ getURL });
+    .then(getURL => {      
+      res.send(getURL);
     })
     .catch(err => {
       res.send(err);
