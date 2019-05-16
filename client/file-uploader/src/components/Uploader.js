@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 export default class Uploader extends Component {
-  state = {};
+  state = {
+    message:''
+  };
 
   getImage = e => {
     const files = e.target.files;
@@ -14,9 +16,8 @@ export default class Uploader extends Component {
 
   uploadFile = e => {
     e.preventDefault();
-    console.log('Uploading....');
     const { file } = this.state;
-
+    this.setState({message:'Uploading...'})
     const contentType = file.type; // eg. image/jpeg or image/svg+xml
 
     const generatePutUrl = 'http://localhost:3500/generate-put-url';
@@ -34,16 +35,17 @@ export default class Uploader extends Component {
       const {
         data: { putURL }
       } = res;
-
-      console.log({ putURL, file, options });
-
       axios
         .put(putURL, file, options)
         .then(res => {
-          console.log('Success');
-          console.log('res', ': ', res);
+          this.setState({message:'Upload Successful'})
+          setTimeout(()=>{
+            this.setState({message:''});
+            document.querySelector('#upload-image').value='';
+          }, 2000)
         })
         .catch(err => {
+          this.setState({message:'Sorry, something went wrong'})
           console.log('err', err);
         });
     });
@@ -59,7 +61,7 @@ export default class Uploader extends Component {
           accept='image/*'
           onChange={this.getImage}
         />
-
+        <p>{this.state.message}</p>
         <form onSubmit={this.uploadFile}>
           <button id='file-upload-button'>Upload</button>
         </form>

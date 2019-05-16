@@ -28,7 +28,7 @@ export default class DisplayImage extends Component {
 
     return (
       <React.Fragment>
-        <h1>Preview Image from AWS S3 Bucket</h1>
+        <h1>Retrieve Image from AWS S3 Bucket</h1>
 
         <form onSubmit={this.formHandler}>
           <label> Image name:</label>
