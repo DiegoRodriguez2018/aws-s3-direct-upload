@@ -19,7 +19,7 @@ const Bucket = process.env.BUCKET_NAME;
 // For more information check the AWS documentation: https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html
 
 // GET URL Generator
-async function generateGetUrl(Key) {
+function generateGetUrl(Key) {
   return new Promise((resolve, reject) => {
     const params = {
       Bucket,
@@ -39,7 +39,7 @@ async function generateGetUrl(Key) {
 }
 
 // PUT URL Generator
-async function generatePutUrl(Key, ContentType) {
+function generatePutUrl(Key, ContentType) {
   return new Promise((resolve, reject) => {
     // Note Bucket is retrieved from the env variable above.
     const params = { Bucket, Key, ContentType };
