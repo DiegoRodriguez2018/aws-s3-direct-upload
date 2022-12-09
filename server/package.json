@@ -7,7 +7,7 @@
     "aws-sdk": "^2.455.0",
     "cors": "^2.8.5",
     "dotenv": "^8.0.0",
-    "express": "^4.16.4"
+    "express": "^4.17.3"
   },
   "devDependencies": {},
   "scripts": {
